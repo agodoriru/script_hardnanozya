@@ -9,7 +9,7 @@
 
 
 # Interval seconds
-IntervalSec=60
+IntervalSec=10
 
 target=$1
 
@@ -30,17 +30,11 @@ do
 	do
             datetime="$(date "+%Y/%m/%d %H:%M:%S")"
             message=`curl -o /dev/null -s -w %{http_code} $line`
-<<COMMENTOUT
-	    if [ $message = 200 ]
-	    then
-		echo "OK"
-	    else
-		echo "NG"
-	    fi
-COMMENTOUT
-            message_="${datetime},${message},${line}"
-            echo ${message_} >> ${logFilename}
-            echo ${message_}
+
+            message_log="${datetime},${message},${line}"
+            message_stdout="${line} ${message}"
+            echo ${message_log} >> ${logFilename}
+            echo ${message_stdout}
 	    sleep 1
         done
     sleep ${IntervalSec}
