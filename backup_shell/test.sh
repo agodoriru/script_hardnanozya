@@ -1,6 +1,8 @@
 #!/bin/bash
 
 echo "monitoring"
+
+# cp -r /var/www/
 while :
 do
 echo " ================= "
